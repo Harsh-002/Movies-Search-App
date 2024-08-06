@@ -72,15 +72,16 @@ const setPopularMovies = (movies) => {
       movieItem.classList.add("active");
 
       //Animation fade-in and fade-out
-      document
-        .querySelector(".movie-image.go-left")
-        .classList.remove("go-left");
-      document
-        .querySelector(".movie-info.go-right")
-        .classList.remove("go-right");
 
-      movieItem.childNodes[1].classList.add("go-left");
-      movieItem.lastChild.classList.add("go-right");
+      document
+        .querySelector(".movie-image.fade-in-left")
+        .classList.add("fade-in-left");
+      document
+        .querySelector(".movie-info.fade-in-right")
+        .classList.remove("fade-in-right");
+
+      movieItem.childNodes[1].classList.add("fade-in-left");
+      movieItem.lastChild.classList.add("fade-in-right");
     });
     pagination.appendChild(dot);
   });
@@ -88,9 +89,9 @@ const setPopularMovies = (movies) => {
   const firstMovie = movieCarousel.firstChild;
   firstMovie.classList.add("active");
 
-  firstMovie.lastChild.classList.add("go-right");
+  firstMovie.lastChild.classList.add("fade-in-right");
 
-  firstMovie.childNodes[1].classList.add("go-left");
+  firstMovie.childNodes[1].classList.add("fade-in-left");
 
   pagination.firstChild.classList.add("active");
 };
@@ -165,6 +166,33 @@ const setMovies = (movies, targetEl) => {
     tileContent.appendChild(contentTitle);
     tileContent.appendChild(releaseYear);
 
+    //More info box appear on click
+    movieTile.addEventListener("click", () => {
+      showMoreInfo(movie);
+      console.log(movie);
+    });
+
     targetEl.appendChild(movieTile);
   });
+};
+
+const viewMore = document.querySelector(".view-more");
+const viewTitle = document.querySelector(".view-more-title");
+const viewDesc = document.querySelector(".view-more-desc");
+const viewPop = document.querySelector(".view-more-pop");
+const viewRating = document.querySelector(".view-more-rating");
+const viewDate = document.querySelector(".view-more-release");
+
+const cross = document.querySelector(".cross");
+
+cross.addEventListener("click", () => [viewMore.classList.remove("active")]);
+
+const showMoreInfo = (movie) => {
+  viewMore.classList.add("active");
+
+  viewTitle.textContent = movie.title;
+  viewDesc.textContent = movie.overview;
+  viewPop.textContent = "Popularity: " + movie.popularity.toFixed(1);
+  viewRating.textContent = "Rating: " + movie.vote_average.toFixed(1);
+  viewDate.textContent = "Release Date: " + movie.release_date;
 };
