@@ -13,7 +13,6 @@ const getPopularMovies = async () => {
       options
     );
     const data = await res.json();
-    console.log(data);
     setPopularMovies(data.results);
   } catch (err) {
     console.log("Something went wrong: " + err);
@@ -109,7 +108,6 @@ const getTrendingMovies = async () => {
       options
     );
     const data = await res.json();
-    console.log(data);
     setMovies(data.results, tiles);
   } catch (error) {
     console.log("Something went wrong: " + error);
@@ -137,7 +135,6 @@ const getSearchResults = async () => {
       options
     );
     const data = await res.json();
-    console.log(data);
     searchTiles.textContent = "";
     setMovies(data.results, searchTiles);
   } catch (error) {
