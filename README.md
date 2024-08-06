@@ -1,14 +1,18 @@
 # Movies-Search-App
 
-Create a config.js file right next to index.html and add your API key there:
+Create a config.js file right next to index.html and add your API Read Access Token there:
 
     const config = {
-        TMDB_API_KEY: "your_api_key",
+        TMDB_API_Read_Access_Token: "your_api_access_token",
     };
 
-You can get your free API key from here: https://developer.themoviedb.org/docs/getting-started
+You can get your free API key and API Read Access Token from here:
 
-Import this file in your HTMl file and run HTML file in your browser
+Sign up here: https://developer.themoviedb.org/docs/getting-started
+
+Go to Settings > API or click here "https://www.themoviedb.org/settings/api"
+
+Import this config.js file in your HTMl file
 
 Screenshots:
 <img width="1422" alt="Screenshot 2024-08-06 at 2 59 28 PM" src="https://github.com/user-attachments/assets/df59fad7-b119-4a91-a2a3-cf3b87aceb05">
