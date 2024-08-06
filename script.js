@@ -2,8 +2,7 @@ const options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OWQ4NjJiMWMzMzZjZGFhMTg5NWY5MTJjODYzNWY1NCIsIm5iZiI6MTcyMjkxOTU4Ny4zOTk5NSwic3ViIjoiNjZiMWE5OTRiOGE0OWNiODFmZmMxYzVjIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.tLSylS32CAUL0Qsr79ZptCaHFJtsmNNWoxlc6WftBqM",
+    Authorization: "Bearer" + config.TMDB_API_KEY,
   },
 };
 
