@@ -17,7 +17,7 @@ const getPopularMovies = async () => {
     console.log(data);
     setPopularMovies(data.results);
   } catch (err) {
-    console.log("Something went wrong:" + err);
+    console.log("Something went wrong: " + err);
   }
 };
 
@@ -98,3 +98,77 @@ const setPopularMovies = (movies) => {
 };
 
 getPopularMovies();
+
+const page = 2;
+
+const getTrendingMovies = async () => {
+  const tiles = document.querySelector(".tiles");
+
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`,
+      options
+    );
+    const data = await res.json();
+    console.log(data);
+    setMovies(data.results, tiles);
+  } catch (error) {
+    console.log("Something went wrong: " + error);
+  }
+};
+
+getTrendingMovies();
+
+const searchInput = document.querySelector(".search-input");
+
+const searchForm = document.querySelector("#form");
+
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  getSearchResults();
+  window.scrollTo(0, document.body.scrollHeight);
+  searchInput.value = "";
+});
+
+const getSearchResults = async () => {
+  const searchTiles = document.querySelector(".search-tiles");
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${searchInput.value}&include_adult=true&language=en-US&page=1`,
+      options
+    );
+    const data = await res.json();
+    console.log(data);
+    searchTiles.textContent = "";
+    setMovies(data.results, searchTiles);
+  } catch (error) {
+    console.log("Something went wrong: " + error);
+  }
+};
+
+const setMovies = (movies, targetEl) => {
+  movies.forEach((movie) => {
+    const movieTile = document.createElement("div");
+    movieTile.classList.add("movie-tile");
+
+    movieTile.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${movie.poster_path})`;
+
+    const tileContent = document.createElement("div");
+    tileContent.classList.add("content");
+
+    movieTile.appendChild(tileContent);
+
+    const contentTitle = document.createElement("span");
+    contentTitle.classList.add("tile-title");
+    contentTitle.textContent = movie.original_title;
+
+    const releaseYear = document.createElement("span");
+    releaseYear.classList.add("release-year");
+    releaseYear.textContent = movie.release_date.slice(0, 4);
+
+    tileContent.appendChild(contentTitle);
+    tileContent.appendChild(releaseYear);
+
+    targetEl.appendChild(movieTile);
+  });
+};
